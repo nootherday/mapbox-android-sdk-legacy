@@ -129,7 +129,7 @@ cd <PROJECT_ROOT>
 
 ## Code Examples
 
-The `MapboxAndroidSDKTestApp` contains many code examples of commonly requested features.  It's also a fully runnable application that's used to test features of the SDK during development.
+In addition to the [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/QUICKSTART.md), the `MapboxAndroidSDKTestApp` contains many code examples of commonly requested features.  It's also a fully runnable application that's used to test features of the SDK during development.
 
 * [Offline Tiles](https://github.com/mapbox/mapbox-android-sdk/blob/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp/SaveMapOfflineTestFragment.java)
 * [MBTiles](https://github.com/mapbox/mapbox-android-sdk/blob/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp/MBTilesTestFragment.java)
@@ -157,4 +157,3 @@ This project is a fork of OSMDroid, but is significantly different as the result
 
 The project's `master` branch is actually `mb-pages`.  There is no branch named `master` nor will there be.  The reason for it is that it allows some automatic processing and publishing of documentation behind the scenes.  In practice this shouldn't affect anybody wanting to contribute, but is something that will probably seem a bit "different" to newcomers.  Anyway, that's what's going on.  If you'd like more information please see [#404](https://github.com/mapbox/mapbox-android-sdk/issues/404) .
 
-## [Quick-start Guide](https://github.com/mapbox/mapbox-android-sdk/blob/mb-pages/QUICKSTART.md)
