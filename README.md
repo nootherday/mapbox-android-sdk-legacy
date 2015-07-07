@@ -127,6 +127,16 @@ cd <PROJECT_ROOT>
 
 **Don't forget to then also include the dependencies from `MapboxAndroidSDK / build.gradle` in your classpath!**
 
+## Code Examples
+
+The `MapboxAndroidSDKTestApp` contains many code examples of commonly requested features.  It's also a fully runnable application that's used to test features of the SDK during development.
+
+* [Offline Tiles](https://github.com/mapbox/mapbox-android-sdk/blob/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp/SaveMapOfflineTestFragment.java)
+* [MBTiles](https://github.com/mapbox/mapbox-android-sdk/blob/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp/MBTilesTestFragment.java)
+* [Custom Markers and InfoWindows](https://github.com/mapbox/mapbox-android-sdk/blob/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp/CustomMarkerTestFragment.java)
+* [Marker Clustering](https://github.com/mapbox/mapbox-android-sdk/blob/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp/ClusteredMarkersTestFragment.java)
+* and [many more](https://github.com/mapbox/mapbox-android-sdk/tree/fe4f3696ea6f9e36da3cd8aee91dd8d0f1f259df/MapboxAndroidSDKTestApp/src/main/java/com/mapbox/mapboxsdk/android/testapp)!
+
 ## Changes from OSMDroid
 
 This project is a fork of OSMDroid, but is significantly different as the result of major refactoring and rethinking.
