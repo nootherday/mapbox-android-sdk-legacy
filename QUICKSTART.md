@@ -64,6 +64,8 @@ And set it as the current view like this:
 this.setContentView(mapView);
 ```
 
+**Note: Markers and polygons that exist as part of your Mapbox-hosted map will not automatically draw.**  Please see the following sections for how to add these features programatically.
+
 ### Overlays
 
 Anything visual that is displayed over the map, maintaining its geographical
