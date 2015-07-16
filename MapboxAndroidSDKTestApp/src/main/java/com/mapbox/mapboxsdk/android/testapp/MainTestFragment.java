@@ -29,9 +29,9 @@ import com.mapbox.mapboxsdk.views.util.TilesLoadedListener;
 public class MainTestFragment extends Fragment {
     private LatLng startingPoint = new LatLng(51f, 0f);
     private MapView mv;
-    private String satellite = "brunosan.map-cyglrrfu";
-    private String street = "examples.map-i87786ca";
-    private String terrain = "examples.map-zgrqqx0w";
+    private String satellite = "mapbox.satellite";
+    private String street = "mapbox.streets";
+    private String terrain = "mapbox.outdoors";
     private String currentLayer = "";
 
     @Override

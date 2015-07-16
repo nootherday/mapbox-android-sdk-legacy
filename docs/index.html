@@ -2,7 +2,7 @@
 layout: pages
 category: overview
 title: Mapbox Android SDK
-mapid: examples.map-i86nkdio
+mapid: mapbox.streets
 navigation:
 - title: Installation
   items:
@@ -254,7 +254,7 @@ this.findViewById(R.id.mapview);
 {% highlight java %}
 MapView mapView = new MapView(context);
 mapView.setAccessToken("Your Mapbox Access Token");
-mapView.setTileSource(new MapboxTileLayer("examples.map-vyofok3q"));
+mapView.setTileSource(new MapboxTileLayer("mapbox.streets"));
 {% endhighlight %}
 
 And set it as the current view like this:

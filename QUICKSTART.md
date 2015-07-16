@@ -56,7 +56,7 @@ a [ZXY image template](http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames).
 ```java
 MapView mapView = new MapView(context);
 mapView.setAccessToken("Your Mapbox Access Token");
-mapView.setTileSource(new MapboxTileLayer("examples.map-vyofok3q"));
+mapView.setTileSource(new MapboxTileLayer("mapbox.streets"));
 ```
 
 And set it as the current view like this:
