@@ -2,63 +2,58 @@ package com.mapbox.mapboxsdk.android.testapp;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import java.util.ArrayList;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 	private DrawerLayout          mDrawerLayout;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private ListView              mDrawerList;
-	private ArrayList<String>     testFragmentNames;
+	private NavigationView        mNavigationView;
+	private Menu                  testFragmentNames;
 	private int selectedFragmentIndex = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		/*
-	       MapView.setDebugMode(true); //make sure to call this before the view is created!
+		   MapView.setDebugMode(true); //make sure to call this before the view is created!
            */
 		setContentView(R.layout.activity_main);
 
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+		mNavigationView.setNavigationItemSelectedListener(this);
 
 		// Set the adapter for the list view
-		testFragmentNames = new ArrayList<String>();
-		testFragmentNames.add(getString(R.string.mainTestMap));
-		testFragmentNames.add(getString(R.string.alternateTestMap));
-		testFragmentNames.add(getString(R.string.markersTestMap));
-		testFragmentNames.add(getString(R.string.itemizedOverlayTestMap));
-		testFragmentNames.add(getString(R.string.localGeoJSONTestMap));
-		testFragmentNames.add(getString(R.string.localOSMTestMap));
-		testFragmentNames.add(getString(R.string.diskCacheDisabledTestMap));
-		testFragmentNames.add(getString(R.string.offlineCacheTestMap));
-		testFragmentNames.add(getString(R.string.programmaticTestMap));
-		testFragmentNames.add(getString(R.string.webSourceTileTestMap));
-		testFragmentNames.add(getString(R.string.locateMeTestMap));
-		testFragmentNames.add(getString(R.string.pathTestMap));
-		testFragmentNames.add(getString(R.string.bingTestMap));
-		testFragmentNames.add(getString(R.string.saveMapOfflineTestMap));
-		testFragmentNames.add(getString(R.string.tapForUTFGridTestMap));
-		testFragmentNames.add(getString(R.string.customMarkerTestMap));
-		testFragmentNames.add(getString(R.string.rotatedMapTestMap));
-		testFragmentNames.add(getString(R.string.clusteredMarkersTestMap));
-		testFragmentNames.add(getString(R.string.mbTilesTestMap));
-
-		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, testFragmentNames));
-		// Set the list's click listener
-		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		testFragmentNames = mNavigationView.getMenu();
+		int i = 0;
+		testFragmentNames.add(Menu.NONE, i, Menu.NONE, getString(R.string.mainTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.alternateTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.markersTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.itemizedOverlayTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.localGeoJSONTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.localOSMTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.diskCacheDisabledTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.offlineCacheTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.programmaticTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.webSourceTileTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.locateMeTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.pathTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.bingTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.saveMapOfflineTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.tapForUTFGridTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.customMarkerTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.rotatedMapTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.clusteredMarkersTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.mbTilesTestMap));
 
 		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
 				R.drawable.ic_drawer, R.string.drawerOpen, R.string.drawerClose) {
@@ -66,13 +61,11 @@ public class MainActivity extends AppCompatActivity {
 			/** Called when a drawer has settled in a completely closed state. */
 			public void onDrawerClosed(View view) {
 				super.onDrawerClosed(view);
-				getSupportActionBar().setTitle(testFragmentNames.get(selectedFragmentIndex));
 			}
 
 			/** Called when a drawer has settled in a completely open state. */
 			public void onDrawerOpened(View drawerView) {
 				super.onDrawerOpened(drawerView);
-				getSupportActionBar().setTitle(R.string.appName);
 			}
 		};
 
@@ -101,21 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Pass the event to ActionBarDrawerToggle, if it returns
-		// true, then it has handled the app icon touch event
-		if (mDrawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		// Handle your other action bar items...
-
-		return super.onOptionsItemSelected(item);
-	}
-
-	private class DrawerItemClickListener implements ListView.OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView parent, View view, int position, long id) {
-			selectItem(position);
-		}
+		return mDrawerToggle.onOptionsItemSelected(item);
 	}
 
 	/**
@@ -195,14 +174,17 @@ public class MainActivity extends AppCompatActivity {
 				.replace(R.id.content_frame, fragment)
 				.commit();
 
-		// Highlight the selected item, update the title, and close the drawer
-		mDrawerList.setItemChecked(position, true);
-		setTitle(testFragmentNames.get(position));
-		mDrawerLayout.closeDrawer(mDrawerList);
+		mDrawerLayout.closeDrawer(mNavigationView);
 	}
 
 	@Override
 	public void setTitle(CharSequence title) {
 		getSupportActionBar().setTitle(title);
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(final MenuItem menuItem) {
+		selectItem(menuItem.getItemId());
+		return true;
 	}
 }
