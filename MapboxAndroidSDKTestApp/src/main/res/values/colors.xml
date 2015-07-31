@@ -2,4 +2,8 @@
 <resources>
     <color name="mapboxBlue">#3887be</color>
     <color name="mapboxGreen">#56b881</color>
+
+    <item name="colorPrimary">@color/mapboxBlue</item>
+    <item name="colorPrimaryDark">@color/mapboxBlue</item>
+    <item name="colorAccent">@color/mapboxGreen</item>
 </resources>
