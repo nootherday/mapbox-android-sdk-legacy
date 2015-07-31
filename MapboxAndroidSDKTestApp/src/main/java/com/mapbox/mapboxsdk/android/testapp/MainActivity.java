@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		// Set the adapter for the list view
 		testFragmentNames = mNavigationView.getMenu();
 		int i = 0;
-		testFragmentNames.add(Menu.NONE, i, Menu.NONE, getString(R.string.mainTestMap));
+		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.mainTestMap));
 		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.alternateTestMap));
 		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.markersTestMap));
 		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.itemizedOverlayTestMap));
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.customMarkerTestMap));
 		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.rotatedMapTestMap));
 		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.clusteredMarkersTestMap));
-		testFragmentNames.add(Menu.NONE, i++, Menu.NONE, getString(R.string.mbTilesTestMap));
+		testFragmentNames.add(Menu.NONE, i, Menu.NONE, getString(R.string.mbTilesTestMap));
 
 
 		// Set the drawer toggle as the DrawerListener
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		// Sync the toggle state after onRestoreInstanceState has occurred.
 		mDrawerToggle.syncState();
 	}
 
@@ -89,6 +88,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	 * Swaps fragments in the main content view
 	 */
 	private void selectItem(int position) {
+		final MenuItem menuItem = mNavigationView.getMenu().findItem(position);
+		setTitle(menuItem.getTitle());
+
 		selectedFragmentIndex = position;
 		// Create a new fragment and specify the planet to show based on position
 		Fragment fragment;
