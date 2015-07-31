@@ -6,5 +6,6 @@
     <color name="primary">#03A9F4</color>
     <color name="primaryDark">#0288D1</color>
     <color name="accent">#64FFDA</color>
+    <color name="accentHighlight">#64FFDA</color>
 
 </resources>
