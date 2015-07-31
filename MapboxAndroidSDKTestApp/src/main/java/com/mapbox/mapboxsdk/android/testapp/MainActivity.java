@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -186,5 +187,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	public boolean onNavigationItemSelected(final MenuItem menuItem) {
 		selectItem(menuItem.getItemId());
 		return true;
+	}
+
+	@Override
+	public void onBackPressed() {
+		if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+			mDrawerLayout.closeDrawer(GravityCompat.START);
+		} else {
+			super.onBackPressed();
+		}
 	}
 }
