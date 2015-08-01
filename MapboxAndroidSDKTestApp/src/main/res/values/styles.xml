@@ -1,5 +1,7 @@
 <resources>
 
+    <style name="AppTheme" parent="BaseTheme"/>
+
     <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/mapboxBlue</item>
         <item name="colorPrimaryDark">@color/mapboxBlue</item>
