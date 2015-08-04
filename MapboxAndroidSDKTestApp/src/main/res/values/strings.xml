@@ -22,9 +22,6 @@
     <string name="pathTestMap">PathOverlay</string>
     <string name="bingTestMap">Bing Test Map</string>
     <string name="draggableMarkersTestMap">Draggable Markers</string>
-    <string name="mapbox_id_street">examples.map-i87786ca</string>
-    <string name="mapbox_id_satellite">brunosan.map-cyglrrfu</string>
-    <string name="mapbox_id_terrain">examples.map-zgrqqx0w</string>
     <string name="mapbox_id_street">mapbox.streets</string>
     <string name="mapbox_id_satellite">mapbox.satellite</string>
     <string name="mapbox_id_terrain">mapbox.outdoors</string>
