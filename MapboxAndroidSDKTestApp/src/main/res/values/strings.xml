@@ -38,5 +38,7 @@
     <string name="animatedMapButtonText">Animate</string>
     <string name="testAccessToken">pk.eyJ1IjoiYmxlZWdlIiwiYSI6IkRGLTFPU00ifQ.qJpq3jytAL9A-z_tkNypqg</string>
     <string name="customInfoWindowOnTouchMessage">Hey, I just customized the CustomInfoWindows\'s onTouchListener()!</string>
+    <string name="navigationdrawer_open">open</string>
+    <string name="navigationdrawer_close">close</string>
 
 </resources>
