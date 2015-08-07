@@ -8,5 +8,6 @@ highlighter: pygments
 version: 0.7.0
 snapshot: 0.7.1-SNAPSHOT
 defaultid: 'mapbox.streets'
+mapboxjs: v2.2.1
 rdiscount:
   extensions: [smart]
