@@ -658,6 +658,16 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         }
     }
 
+    public void onDoubleTap(final ILatLng p) {
+        if (mMapViewListener != null) {
+            mMapViewListener.onDoubleTapMap(MapView.this, p);
+        }
+        else
+        {
+            this.zoomInFixing(p, false);
+        }
+    }
+
     /**
      * Returns the map's controller
      */
