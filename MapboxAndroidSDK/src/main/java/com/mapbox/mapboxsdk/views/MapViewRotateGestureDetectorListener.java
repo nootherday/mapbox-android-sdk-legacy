@@ -18,6 +18,7 @@ public class MapViewRotateGestureDetectorListener implements RotateGestureDetect
     private float firstAngle;
     private float currentDelta;
 
+    private boolean real = false;
 
     /**
      * Bind a new gesture detector to a map
@@ -32,14 +33,24 @@ public class MapViewRotateGestureDetectorListener implements RotateGestureDetect
     public boolean onRotate(RotateGestureDetector detector) {
         float delta = detector.getRotationDegreesDelta();
         currentDelta += delta;
-        float newAngle = firstAngle - currentDelta;
-        mapView.setMapOrientation(newAngle);
 
-        // If a listener has been set, callback
-        OnMapOrientationChangeListener l = mapView.getOnMapOrientationChangeListener();
-        if (l != null) {
-            l.onMapOrientationChange(newAngle);
+        if (!real && Math.abs(this.currentDelta) >= 7.5) {
+            this.currentDelta = 0;
+            real = true;
+            return true;
         }
+
+        if (real) {
+            float newAngle = firstAngle - currentDelta;
+            mapView.setMapOrientation(newAngle);
+
+            // If a listener has been set, callback
+            OnMapOrientationChangeListener l = mapView.getOnMapOrientationChangeListener();
+            if (l != null) {
+                l.onMapOrientationChange(newAngle);
+            }
+        }
+
         return true;
     }
 
@@ -47,6 +58,7 @@ public class MapViewRotateGestureDetectorListener implements RotateGestureDetect
     public boolean onRotateBegin(RotateGestureDetector detector) {
         firstAngle = mapView.getMapOrientation();
         currentDelta = 0;
+        real = false;
         return true;
     }
 

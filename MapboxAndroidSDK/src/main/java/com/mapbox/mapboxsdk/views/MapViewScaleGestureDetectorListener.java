@@ -23,6 +23,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
     private final MapView mapView;
     private boolean scaling;
     private float currentScale;
+    private boolean real = false;
 
     /**
      * Bind a new gesture detector to a map
@@ -44,6 +45,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
             this.mapView.getController().aboutToStartAnimation(lastFocusX, lastFocusY);
             scaling = true;
         }
+        real = false;
         return true;
     }
 
@@ -54,15 +56,24 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         }
         currentScale = detector.getCurrentSpan() / firstSpan;
 
-        float focusX = detector.getFocusX();
-        float focusY = detector.getFocusY();
+        if (!real && (currentScale < 0.96 || currentScale > 1.04)) {
+            onScaleBegin(detector);
+            real = true;
+            return true;
+        }
 
-        this.mapView.setScale(currentScale);
-        this.mapView.getController().offsetDeltaScroll(lastFocusX - focusX, lastFocusY - focusY);
-        this.mapView.getController().panBy(lastFocusX - focusX, lastFocusY - focusY, true);
+        if (real) {
+            float focusX = detector.getFocusX();
+            float focusY = detector.getFocusY();
 
-        lastFocusX = focusX;
-        lastFocusY = focusY;
+            this.mapView.setScale(currentScale);
+            this.mapView.getController().offsetDeltaScroll(lastFocusX - focusX, lastFocusY - focusY);
+            this.mapView.getController().panBy(lastFocusX - focusX, lastFocusY - focusY, true);
+
+            lastFocusX = focusX;
+            lastFocusY = focusY;
+        }
+
         return true;
     }
 
@@ -72,20 +83,27 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
             return;
         }
 
-        //delaying the "end" will prevent some crazy scroll events when finishing
-        //scaling by getting 2 fingers very close to each other
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                float preZoom = mapView.getZoomLevel(false);
-                float newZoom = (float) (Math.log(currentScale) / Math.log(2d) + preZoom);
-                //set animated zoom so that animationEnd will correctly set it in the mapView
-                mapView.setAnimatedZoom(newZoom);
-                mapView.getController().onAnimationEnd();
-                scaling = false;
-            }
-        }, 100);
+        float preZoom = mapView.getZoomLevel(false);
+        float newZoom = (float) (Math.log(currentScale) / Math.log(2d) + preZoom);
+        //set animated zoom so that animationEnd will correctly set it in the mapView
+        mapView.setAnimatedZoom(newZoom);
+        mapView.getController().onAnimationEnd();
+        scaling = false;
+
+//        //delaying the "end" will prevent some crazy scroll events when finishing
+//        //scaling by getting 2 fingers very close to each other
+//        final Handler handler = new Handler();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                float preZoom = mapView.getZoomLevel(false);
+//                float newZoom = (float) (Math.log(currentScale) / Math.log(2d) + preZoom);
+//                //set animated zoom so that animationEnd will correctly set it in the mapView
+//                mapView.setAnimatedZoom(newZoom);
+//                mapView.getController().onAnimationEnd();
+//                scaling = false;
+//            }
+//        }, 100);
 
     }
 }

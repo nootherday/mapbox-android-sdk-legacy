@@ -40,14 +40,14 @@ public class MapViewGestureDetectorListener extends SimpleOnGestureListener {
 
     @Override
     public boolean onFling(final MotionEvent e1, final MotionEvent e2, final float velocityX, final float velocityY) {
-        if (this.mapView.isAnimating() || this.mapView.getOverlayManager().onFling(e1, e2, velocityX, velocityY, this.mapView)) {
+        if (this.mapView.isAnimating() || this.mapView.getOverlayManager().onFling(e1, e2, velocityX / 3, velocityY / 3, this.mapView)) {
             return true;
         }
 
         final int worldSize = this.mapView.getProjection().mapSize(this.mapView.getZoomLevel(false));
         this.mapView.mIsFlinging = true;
         this.mapView.mScroller.fling(this.mapView.getScrollX(), this.mapView.getScrollY(),
-                (int) -velocityX, (int) -velocityY, -worldSize, worldSize, -worldSize, worldSize);
+                (int) -velocityX / 3, (int) -velocityY / 3, -worldSize, worldSize, -worldSize, worldSize);
         return true;
     }
 
