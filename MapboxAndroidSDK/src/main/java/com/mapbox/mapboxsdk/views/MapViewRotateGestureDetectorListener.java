@@ -19,14 +19,16 @@ public class MapViewRotateGestureDetectorListener implements RotateGestureDetect
     private float currentDelta;
 
     private boolean real = false;
+    private final MapViewScaleGestureDetectorListener mScaleGestureDetectorListener;
 
     /**
      * Bind a new gesture detector to a map
      *
      * @param mv a map view
      */
-    public MapViewRotateGestureDetectorListener(final MapView mv) {
+    public MapViewRotateGestureDetectorListener(final MapView mv, final MapViewScaleGestureDetectorListener sgdl) {
         this.mapView = mv;
+        this.mScaleGestureDetectorListener = sgdl;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class MapViewRotateGestureDetectorListener implements RotateGestureDetect
 
         if (!real && Math.abs(this.currentDelta) >= 7.5) {
             this.currentDelta = 0;
+            if (mScaleGestureDetectorListener.isInProgress()) return true;
             real = true;
             return true;
         }

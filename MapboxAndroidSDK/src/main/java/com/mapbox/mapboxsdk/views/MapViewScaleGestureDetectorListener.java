@@ -23,7 +23,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
     private final MapView mapView;
     private boolean scaling;
     private float currentScale;
-    private boolean real = false;
+    private boolean mIsInProgress = false;
 
     /**
      * Bind a new gesture detector to a map
@@ -33,6 +33,8 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
     public MapViewScaleGestureDetectorListener(final MapView mv) {
         this.mapView = mv;
     }
+
+    public boolean isInProgress() { return mIsInProgress; }
 
     @Override
     public boolean onScaleBegin(ScaleGestureDetector detector) {
@@ -45,7 +47,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
             this.mapView.getController().aboutToStartAnimation(lastFocusX, lastFocusY);
             scaling = true;
         }
-        real = false;
+        mIsInProgress = false;
         return true;
     }
 
@@ -56,13 +58,13 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         }
         currentScale = detector.getCurrentSpan() / firstSpan;
 
-        if (!real && (currentScale < 0.96 || currentScale > 1.04)) {
+        if (!mIsInProgress && (currentScale < 0.93 || currentScale > 1.07)) {
             onScaleBegin(detector);
-            real = true;
+            mIsInProgress = true;
             return true;
         }
 
-        if (real) {
+        if (mIsInProgress) {
             float focusX = detector.getFocusX();
             float focusY = detector.getFocusY();
 
@@ -89,6 +91,7 @@ public class MapViewScaleGestureDetectorListener implements ScaleGestureDetector
         mapView.setAnimatedZoom(newZoom);
         mapView.getController().onAnimationEnd();
         scaling = false;
+        mIsInProgress = false;
 
 //        //delaying the "end" will prevent some crazy scroll events when finishing
 //        //scaling by getting 2 fingers very close to each other

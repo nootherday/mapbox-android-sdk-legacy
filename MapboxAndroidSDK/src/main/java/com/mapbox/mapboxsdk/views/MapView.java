@@ -213,10 +213,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
         this.mGestureDetector =
                 new GestureDetector(aContext, new MapViewGestureDetectorListener(this));
 
+        MapViewScaleGestureDetectorListener sgdl = new MapViewScaleGestureDetectorListener(this);
         this.mScaleGestureDetector =
-                new ScaleGestureDetector(aContext, new MapViewScaleGestureDetectorListener(this));
+                new ScaleGestureDetector(aContext, sgdl);
         this.mRotateGestureDetector =
-                new RotateGestureDetector(aContext, new MapViewRotateGestureDetectorListener(this));
+                new RotateGestureDetector(aContext, new MapViewRotateGestureDetectorListener(this, sgdl));
+
         this.context = aContext;
         MapboxUtils.setVersionNumber(context.getResources().getString(R.string.mapboxAndroidSDKVersion));
         eventsOverlay = new MapEventsOverlay(aContext, this);
@@ -1654,11 +1656,7 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 //        Log.i(TAG, "onTouchEvent with event = " + event);
-        // If map rotation is enabled, propagate onTouchEvent to the rotate gesture detector
-        if (mMapRotationEnabled) {
-//            Log.i(TAG, "onTouchEvent with Rotation Enabled so passing it along to RotationGestureDetector.onTouchEvent()");
-            mRotateGestureDetector.onTouchEvent(event);
-        }
+
         // Get rotated event for some touch listeners.
         MotionEvent rotatedEvent = rotateTouchEvent(event);
 
@@ -1687,6 +1685,12 @@ public class MapView extends ViewGroup implements MapViewConstants, MapEventsRec
             //handleTwoFingersTap should always be called because it counts pointers up/down
             result |= handleTwoFingersTap(rotatedEvent);
 
+            // If map rotation is enabled, propagate onTouchEvent to the rotate gesture detector
+            if (mMapRotationEnabled) {
+    //            Log.i(TAG, "onTouchEvent with Rotation Enabled so passing it along to RotationGestureDetector.onTouchEvent()");
+                mRotateGestureDetector.onTouchEvent(event);
+            }
+        
             return result;
         } finally {
             if (rotatedEvent != event) {
