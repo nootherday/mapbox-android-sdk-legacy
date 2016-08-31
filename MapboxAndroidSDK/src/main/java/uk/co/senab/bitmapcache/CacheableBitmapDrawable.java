@@ -61,6 +61,8 @@ public class CacheableBitmapDrawable extends BitmapDrawable {
 
     private boolean mReused;
 
+    private boolean mIsFailover = false;
+
     public CacheableBitmapDrawable(String url, Resources resources, Bitmap bitmap,
             BitmapLruCache.RecyclePolicy recyclePolicy, int source) {
         super(resources, bitmap);
@@ -73,6 +75,14 @@ public class CacheableBitmapDrawable extends BitmapDrawable {
         mCacheCount = 0;
         mSource = source;
         mReused = false;
+    }
+
+    public void setFailover(boolean isFailover) {
+        mIsFailover = isFailover;
+    }
+
+    public boolean isFailover() {
+        return mIsFailover;
     }
 
     @Override
