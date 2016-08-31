@@ -415,8 +415,10 @@ public class TilesOverlay extends SafeDrawOverlay {
         public void finalizeLoop() {
             super.finalizeLoop();
             // now add the new ones, pushing out the old ones
-            while (!mNewTiles.isEmpty()) {
 
+            // Fatal Exception: java.util.NoSuchElementException 을 해결하기 위해
+            // 안전하게 isEmpty 보다는 it::hasNext 를 사용한다.
+            while (mNewTiles.keySet().iterator().hasNext()) {
                 final MapTile tile = mNewTiles.keySet().iterator().next();
                 final Bitmap bitmap = mNewTiles.remove(tile);
                 mTileProvider.putExpiredTileIntoCache(tile, bitmap);
