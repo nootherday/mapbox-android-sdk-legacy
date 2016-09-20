@@ -121,7 +121,7 @@ public class MapTileLayerArray extends MapTileLayerBase {
 
         CacheableBitmapDrawable tileDrawable = mTileCache.getMapTileFromMemory(pTile);
 
-        if (tileDrawable != null && tileDrawable.isBitmapValid() && !BitmapUtils.isCacheDrawableExpired(tileDrawable) && !tileDrawable.isFailover()) {
+        if (tileDrawable != null && tileDrawable.isBitmapValid() && !BitmapUtils.isCacheDrawableExpired(tileDrawable)) {
             tileDrawable.setBeingUsed(true);
 //            Log.d(TAG, "Found tile(" + pTile.getCacheKey() + ") in memory, so returning for drawing.");
             return tileDrawable;
